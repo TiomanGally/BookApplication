@@ -1,0 +1,31 @@
+image: gradle:6.4
+
+# Das hab ich alles gemacht!
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Run Tests
+          script:
+            - gradle test
+          caches:
+            - gradle
+      - step:
+          name: Push Docker Image to Registry
+          caches:
+            - gradle
+          services:
+            - docker
+          script:
+            - gradle build -x test
+            - docker build -t milchkarton/movieit:book-backend-v$BITBUCKET_BUILD_NUMBER .
+            - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+            - docker push $DOCKER_USER/movieit:book-backend-v$BITBUCKET_BUILD_NUMBER
+
+  default:
+    - step:
+        name: Verify that branch works
+        caches:
+          - gradle
+        script:
+          - gradle build

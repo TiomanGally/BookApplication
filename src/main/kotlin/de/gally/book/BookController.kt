@@ -14,7 +14,7 @@ class BookController(
         private val client: BookClient,
         private val bookRepository: BookRepository
 ) {
-    @Get("/api/{isbn}")
+    @Get("/{isbn}")
     fun retrieveBook(@PathVariable("isbn") isbn: String): Maybe<MutableHttpResponse<GoogleBook>> = client
             .requestBookByIsbn(isbn)
             .map { HttpResponse.ok(it) }

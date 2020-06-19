@@ -10,18 +10,18 @@ import javax.persistence.Table
 data class Book(
         val title: String,
 //        val author: List<String>?,
-//        val publisher: String?,
-//        val publishedDate: String?,
-//        val description: String?,
+        val publisher: String?,
+        val publishedDate: String?,
+        val description: String?,
 //        val categories: List<String>?,
-//        val rating: Double,
-//        val isRead: Boolean,
-//        val isRent: Boolean,
-//        val edition: Int,
-//        val imageLinks: String,
-//        val pageCount: String,
-//        val isSeries: Serie,
-//        val language: String
+        val rating: Double? = null,
+        val isRead: Boolean? = null,
+        val isRent: Boolean? = null,
+        val edition: Int? = null,
+        val imageLinks: String? = null,
+        val pageCount: String? = null,
+//        val isSeries: Serie? = null,
+        val language: String? = null,
         @Id
         @GeneratedValue
         var id: Long
